@@ -52,11 +52,11 @@ def main(path_m, path_s):
         return res
       
     # Malware
-    path_mal = path_m # Path
+    path_mal = '/teams/DSC180A_FA20_A00/a04malware/malware' # Path
     features_mal = run(path_mal, 1)
     
     # Safeware
-    path_saf = path_s # Path
+    path_saf = '/teams/DSC180A_FA20_A00/a04malware/test-apps/benign' # Path
     features_saf = run(path_saf, 0)
     
     features = features_mal + features_saf
