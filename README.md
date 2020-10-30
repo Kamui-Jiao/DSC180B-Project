@@ -10,3 +10,8 @@ run() iterates through all softwares to perform generate_feature().
 
 To run it, execute python run.py [path_m] [path_s]. 
 Both are folders like /malware or /test-apps/benign with its subfolders to be softwares.
+
+### Responsibilities
+
+* Jian Jiao developed code which traversing through software smali files, parsing content, generates features, builds up model and calculate mse.
+* Zihan Qin developed 
