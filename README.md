@@ -14,4 +14,4 @@ Both are folders like /malware or /test-apps/benign with its subfolders to be so
 ### Responsibilities
 
 * Jian Jiao developed code which parsing content, generates features and builds up model.
-* Zihan Qin developed report and help my partner to test code
+* Zihan Qin developed report and help partner to test code and debug.
