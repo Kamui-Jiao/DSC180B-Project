@@ -13,5 +13,5 @@ Both are folders like /malware or /test-apps/benign with its subfolders to be so
 
 ### Responsibilities
 
-* Jian Jiao developed code which traversing through software smali files, parsing content, generates features, builds up model and calculate mse.
-* Zihan Qin developed 
+* Jian Jiao developed code which parsing content, generates features and builds up model.
+* Zihan Qin developed report and help my partner to test code
