@@ -16,3 +16,12 @@ def generate_feature(path, ware_name, is_malware):
             return 0
     res = [ware_name, is_malware, df.shape[0], len(df[1].unique()), len(re.findall(r'\.method', sml)), get_num('direct'), get_num('static'), get_num('virtual'), get_num('interface'), get_num('super')]
     return res
+
+
+def run(path, is_mal):
+    res = []
+    wares = [i for i in os.listdir(path)]
+    for d in wares:
+        d_path = path + '/' + d
+        res.append(generate_feature(d_path, d, is_mal))
+    return res
