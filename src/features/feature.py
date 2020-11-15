@@ -25,3 +25,15 @@ def parse_all(path, is_mal):
         d_path = path + '/' + d
         res.append(generate_feature(d_path, d, is_mal))
     return res
+
+def matrix_A(features, cols):
+    res = ''
+    for i in features:
+        dd = pd.DataFrame(i[1]).reset_index()
+        if res is '':
+            res = dd
+        else:
+            res = pd.merge(res, dd, on='index', how='outer')
+    res = res.fillna(0)
+    res.columns = ['api'] + cols
+    return res
