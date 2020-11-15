@@ -18,7 +18,7 @@ def generate_feature(path, ware_name, is_malware):
     return res
 
 
-def run(path, is_mal):
+def parse_all(path, is_mal):
     res = []
     wares = [i for i in os.listdir(path)]
     for d in wares:
