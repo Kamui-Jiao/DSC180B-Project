@@ -3,5 +3,5 @@
     "build": "run.py",
     "library": ["src"], 
     "notebook": ["notebooks/DSC180A_Checkpoint2.ipynb"],
-    "targets": ["feature", "eda", "model"],
+    "targets": ["feature", "eda", "model"]
 }
