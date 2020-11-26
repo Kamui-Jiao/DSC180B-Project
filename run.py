@@ -55,7 +55,18 @@ def main(target):
         y_predict_train = reg.predict(X_train)        
         y_predict_test = reg.predict(X_test)
         mse(y_train, y_predict_train, y_test, y_predict_test)
-    
+        
+    if 'test' in targets:
+        
+        # make the data target
+        features = parse_all('test/testdata', 1)
+        X = [i[2:] for i in features]
+        y = [i[1] for i in features]
+        df = pd.DataFrame(features, columns=['app_name', 'is_malware', 'num_smali','num_api', 'num_unique_api','num_block',
+                                                 'num_direct', 'num_static', 'num_virtual', 'num_interface', 'num_super'])
+        # output type I
+        df.describe().to_csv('describe.csv')
+        
     return reg
 
 
