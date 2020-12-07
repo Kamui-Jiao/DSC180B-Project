@@ -15,6 +15,8 @@ import src.analysis.eda
 def main(target):
     '''
     Runs the main project pipeline logic.
+    'feature' should be included in targets since it is the base for each other targets.
+    'model' should be included in targets when 'test' is target.
     
     '''
     if 'feature' in targets:
@@ -30,24 +32,21 @@ def main(target):
         
     if 'analysis' in targets:
         with open('config/eda.json') as fh:
-            data_cfg = json.load(fh)
+            data_cfg_eda = json.load(fh)
 
         # make the data target
-        plots = eval(data_cfg['plot'])
+        plots = eval(data_cfg_eda['plot'])
         eda(df, plots)
             
     if 'model' in targets:
         with open('config/model.json') as fh:
-            data_cfg = json.load(fh)
+            data_cfg_model = json.load(fh)
 
         # make the data target
-        X_train, X_test, y_train, y_test, reg = build(X, y, data_cfg['C'], data_cfg['max_iter'])        
+        X_train, X_test, y_train, y_test, reg = build(X, y, data_cfg_model['C'], data_cfg_model['max_iter'])        
         mse(X_train, X_test, y_train, y_test, reg)
         
     if 'test' in targets:
-        with open('config/feature.json') as fh:
-            data_cfg = json.load(fh)
-        reg = main('feature', 'model')
         # make the data target
         feature_test = generate_feature('test', 'test', 1, data_cfg['pattern'])
         X_t, _ = generate_Xy(feature_test)
