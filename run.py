@@ -8,8 +8,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
-import build_features
-from model import mse
+import src.features.feature
+import src.models.model
 
 def main(target):
     '''
@@ -24,8 +24,7 @@ def main(target):
         features_mal = parse_all(data_cfg['path_mal'], 1, data_cfg['pattern'])
         features_saf = parse_all(data_cfg['path_saf'], 0, data_cfg['pattern'])
         features = features_mal + features_saf
-        X = [i[2:] for i in features]
-        y = [i[1] for i in features]
+        X, y = generate_Xy(features)
         
     if 'analysis' in targets:
         with open('eda.json') as fh:
@@ -50,18 +49,13 @@ def main(target):
             data_cfg = json.load(fh)
 
         # make the data target
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, shuffle = True)        
-        reg = LogisticRegression(fit_intercept=True, C=data_cfg['C'], max_iter=data_cfg['max_iter']).fit(X_train, y_train)        
-        y_predict_train = reg.predict(X_train)        
-        y_predict_test = reg.predict(X_test)
-        mse(y_train, y_predict_train, y_test, y_predict_test)
+        X_train, X_test, y_train, y_test, reg = build(X, y)        
+        mse(X_train, X_test, y_train, y_test, reg)
         
     if 'test' in targets:
         
         # make the data target
         features = parse_all('test/testdata', 1)
-        X = [i[2:] for i in features]
-        y = [i[1] for i in features]
         df = pd.DataFrame(features, columns=['app_name', 'is_malware', 'num_smali','num_api', 'num_unique_api','num_block',
                                                  'num_direct', 'num_static', 'num_virtual', 'num_interface', 'num_super'])
         # output type I
