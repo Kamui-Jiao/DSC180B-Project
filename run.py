@@ -10,6 +10,7 @@ from sklearn.metrics import mean_squared_error
 
 import src.features.feature
 import src.models.model
+import src.analysis.eda
 
 def main(target):
     '''
@@ -24,6 +25,7 @@ def main(target):
         features_mal = parse_all(data_cfg['path_mal'], 1, data_cfg['pattern'])
         features_saf = parse_all(data_cfg['path_saf'], 0, data_cfg['pattern'])
         features = features_mal + features_saf
+        df = pd.DataFrame(features, columns=data_cfg['column_names'])
         X, y = generate_Xy(features)
         
     if 'analysis' in targets:
@@ -32,17 +34,7 @@ def main(target):
 
         # make the data target
         plots = eval(data_cfg['plot'])
-        df = pd.DataFrame(features, columns=['app_name', 'is_malware', 'num_smali','num_api', 'num_unique_api','num_block',
-                                                 'num_direct', 'num_static', 'num_virtual', 'num_interface', 'num_super'])
-        if 'boxplot' in plots:
-            df.boxplot(column=['num_api', 'num_static', 'num_unique_api'])
-        
-        if 'describe' in plots:
-            df.describe()
-            
-        if 'api_count' in plots:
-            A = matrix_A(features, data_cfg['total_col'])
-            A.describe()
+        eda(df, plots)
             
     if 'model' in targets:
         with open('model.json') as fh:
@@ -56,8 +48,7 @@ def main(target):
         
         # make the data target
         features = parse_all('test/testdata', 1)
-        df = pd.DataFrame(features, columns=['app_name', 'is_malware', 'num_smali','num_api', 'num_unique_api','num_block',
-                                                 'num_direct', 'num_static', 'num_virtual', 'num_interface', 'num_super'])
+        df = pd.DataFrame(features, columns=data_cfg['column_names'])
         # output type I
         df.describe().to_csv('describe.csv')
         
