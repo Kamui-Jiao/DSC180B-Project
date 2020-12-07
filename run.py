@@ -41,18 +41,25 @@ def main(target):
             data_cfg = json.load(fh)
 
         # make the data target
-        X_train, X_test, y_train, y_test, reg = build(X, y)        
+        X_train, X_test, y_train, y_test, reg = build(X, y, data_cfg['C'], data_cfg['max_iter'])        
         mse(X_train, X_test, y_train, y_test, reg)
         
     if 'test' in targets:
-        
+        with open('config/feature.json') as fh:
+            data_cfg = json.load(fh)
+        reg = main('feature', 'model')
         # make the data target
-        features = parse_all('test/testdata', 1)
-        df = pd.DataFrame(features, columns=data_cfg['column_names'])
+        feature_test = generate_feature('test', 'test', 1, data_cfg['pattern'])
+        X_t, _ = generate_Xy(feature_test)
+        df = pd.DataFrame(feature_test, columns=data_cfg['column_names'])
         # output type I
         df.describe().to_csv('describe.csv')
         
-    return reg
+        # output type II
+        pred = reg.predict(X_t)
+        return pred
+        
+    return 'Finished'
 
 
 if __name__ == '__main__':
