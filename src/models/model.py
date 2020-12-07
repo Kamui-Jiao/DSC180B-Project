@@ -1,4 +1,9 @@
-def mse(y_train, y_predict_train, y_test, y_predict_test):    
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+def mse(X_train, X_test, y_train, y_test, reg):
+    y_predict_train = reg.predict(X_train)        
+    y_predict_test = reg.predict(X_test)
     print('train MSE = {}, test MSE = {}'.format(mean_squared_error(y_train, y_predict_train), 
                                                  mean_squared_error(y_test, y_predict_test)))
     return mean_squared_error(y_test, y_predict_test)
