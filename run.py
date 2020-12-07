@@ -18,7 +18,7 @@ def main(target):
     
     '''
     if 'feature' in targets:
-        with open('feature.json') as fh:
+        with open('config/feature.json') as fh:
             data_cfg = json.load(fh)
 
         # make the data target
@@ -29,7 +29,7 @@ def main(target):
         X, y = generate_Xy(features)
         
     if 'analysis' in targets:
-        with open('eda.json') as fh:
+        with open('config/eda.json') as fh:
             data_cfg = json.load(fh)
 
         # make the data target
@@ -37,7 +37,7 @@ def main(target):
         eda(df, plots)
             
     if 'model' in targets:
-        with open('model.json') as fh:
+        with open('config/model.json') as fh:
             data_cfg = json.load(fh)
 
         # make the data target
