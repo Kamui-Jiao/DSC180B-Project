@@ -40,3 +40,8 @@ def matrix_A(features, cols):
     res = res.fillna(0)
     res.columns = ['api'] + cols
     return res
+
+def generate_Xy(features):
+    X = [i[2:] for i in features]
+    y = [i[1] for i in features]
+    return X, y
