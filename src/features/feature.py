@@ -1,5 +1,5 @@
 
-def generate_feature(path, ware_name, is_malware):
+def generate_feature(path, ware_name, is_malware, pat):
     sml = ''
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
@@ -7,7 +7,9 @@ def generate_feature(path, ware_name, is_malware):
                 f = open(os.path.join(root, name))
                 sml += f.read() + '\n'
                 f.close()
-    df = pd.DataFrame(re.findall(r'invoke-(\w{5,9})\s.+}, (.*);->', sml))
+                
+    
+    df = pd.DataFrame(pat.findall(sml))
     nums = df[0].value_counts()
     def get_num(name):
         try:
@@ -18,12 +20,13 @@ def generate_feature(path, ware_name, is_malware):
     return res
 
 
-def parse_all(path, is_mal):
+def parse_all(path, is_mal, pattern):
+    pat = re.compile(pattern)
     res = []
     wares = [i for i in os.listdir(path)]
     for d in wares:
         d_path = path + '/' + d
-        res.append(generate_feature(d_path, d, is_mal))
+        res.append(generate_feature(d_path, d, is_mal, pat))
     return res
 
 def matrix_A(features, cols):
