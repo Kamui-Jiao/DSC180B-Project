@@ -21,8 +21,8 @@ def main(target):
             data_cfg = json.load(fh)
 
         # make the data target
-        features_mal = parse_all(data_cfg['path_mal'], 1)
-        features_saf = parse_all(data_cfg['path_saf'], 0)
+        features_mal = parse_all(data_cfg['path_mal'], 1, data_cfg['pattern'])
+        features_saf = parse_all(data_cfg['path_saf'], 0, data_cfg['pattern'])
         features = features_mal + features_saf
         X = [i[2:] for i in features]
         y = [i[1] for i in features]
