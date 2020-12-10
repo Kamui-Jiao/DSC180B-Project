@@ -1,3 +1,4 @@
 {
-    "dockerhub-id": "kamuijiao/test:latest"
+    "dockerhub-id": "kamuijiao/test:latest",
+    "repository-id": "https://github.com/Kamui-Jiao/DSC180A-Project.git"
 }
