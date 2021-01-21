@@ -27,7 +27,7 @@
 .end method
 
 .method public static Encode(Lcom/google/apply;)V
-    .locals 0
+    .locals 1
 
     return-void
 .end method
