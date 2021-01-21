@@ -47,20 +47,7 @@ def parse_common(path):
         d_path = path + '/' + d
         res.append(generate_feature(d_path, d, 0))
         max_w += 1
-    return res
-
-# Matrix api and software type
-def matrix_A(features, cols):
-    res = ''
-    for i in features:
-        dd = pd.DataFrame(i[1]).reset_index()
-        if res is '':
-            res = dd
-        else:
-            res = pd.merge(res, dd, on='index', how='outer')
-    res = res.fillna(0)
-    res.columns = ['api'] + cols
-    return res
+    return re
 
 # Trasnform features list to df
 def features_todf(features):
