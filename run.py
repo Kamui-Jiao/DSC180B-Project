@@ -4,6 +4,7 @@ import re
 import pandas as pd
 import os
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 import src.features.feature
 import src.models.model
