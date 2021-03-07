@@ -1,1 +1,1 @@
-{"path_mal":"/teams/DSC180A_FA20_A00/a04malware/malware", "path_benign":"/teams/DSC180A_FA20_A00/a04malware/popular-apps", "pattern":"invoke-(\\w{5,9})\\s.+}, (.*);->"}
+{"path_mal":"/teams/DSC180A_FA20_A00/a04malware/malware", "path_benign":"/teams/DSC180A_FA20_A00/a04malware/popular-apps"}
