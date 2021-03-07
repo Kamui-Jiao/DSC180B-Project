@@ -37,8 +37,8 @@ def main(target):
         pred_train = reg_knn.predict(X_train)
         pred_test = reg_knn.predict(X_test)
         reg_advanced = build_KN(X_train, y_train, int(data_cfg_model['n_neighbors_adv']))
-        pred_train_adv = X_train.apply(lambda x:advanced_predict(reg, x), axis=1)
-        pred_test_adv = X_test.apply(lambda x:advanced_predict(reg, x), axis=1)
+        pred_train_adv = X_train.apply(lambda x:advanced_predict(reg_advanced, x), axis=1)
+        pred_test_adv = X_test.apply(lambda x:advanced_predict(reg_advanced, x), axis=1)
 
 
     if 'analysis' in targets:

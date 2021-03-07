@@ -15,16 +15,16 @@ def baseline_predict(X):
 def build_Log(X_train, y_train, C, max_it):
     return LogisticRegression(fit_intercept=True, C=C, max_iter=max_it).fit(X_train, y_train)
 
-def build_DT(X_train, y_train):
-    return DecisionTreeClassifier().fit(X_train, y_train)
+def build_DT(X_train, y_train, n):
+    return DecisionTreeClassifier(max_depth = n).fit(X_train, y_train)
 
 def build_KN(X_train, y_train, n):
     return KNeighborsClassifier(n_neighbors=n).fit(X_train, y_train)
 
 def advanced_predict(reg, x):
-    if x.self < x.java * 0.7:
+    if x.self < x.java * 0.03:
         return 1
-    if sum(x) < 2000 or x.kotlin > 0 or x.androidx > 0:
+    if sum(x) < 1500 or x.kotlin > 0 or x.androidx > 0:
         return 0
     res = reg.predict([x.values])
     if res:
